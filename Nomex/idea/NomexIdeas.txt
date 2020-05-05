@@ -1,0 +1,22 @@
+Name: Nomex
+
+Design: Side scrolling / horizontal movement -> Mario
+	
+	Slingshot mechanics -> Angry Birds
+
+	Vertical Scrolling -> Flappy Bird
+
+Balloon Mechanics:
+1. Pelt stone towards the tower(gets +1 stone) and birds(gets no stones @PETA)
+2. Max loadout is 10 stones
+3. Two healths
+4. Repair Option(180 secs cooldown)
+
+Background Mechanics:
+1. If the hot air balloon flies too close to the atomsphere gravity will increment
+2. If it touches the mountain, balloon will burst
+3. Enemy tower can pelt stone towards the balloon
+4. If the balloon touches the bird it will lose a health
+
+
+
