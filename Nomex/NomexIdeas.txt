@@ -1,0 +1,7 @@
+Name: Nomex
+
+Design: Side scrolling / horizontal movement -> Mario
+	
+	Slingshot mechanics -> Angry Birds
+
+	Vertical Scrolling -> Flappy Bird
