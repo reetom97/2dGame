@@ -18,6 +18,10 @@ Background Mechanics:
 3. Enemy tower can pelt stone towards the balloon
 4. If the balloon touches the bird it will lose a health
 
+Game Mechanics:
+Score: distance
+Can keep track of time 
+
 
 Stone mechanics:
 love.keypressed(key) -- will throw stone at whichever y and continue across positive x 
