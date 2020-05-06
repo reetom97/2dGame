@@ -14,9 +14,34 @@ Balloon Mechanics:
 
 Background Mechanics:
 1. If the hot air balloon flies too close to the atomsphere gravity will increment
-2. If it touches the mountain, balloon will burst
+2. If it touches the mountain, balloon will burst 
 3. Enemy tower can pelt stone towards the balloon
 4. If the balloon touches the bird it will lose a health
+
+
+Health:
+Bird =1 
+Archer =1
+ballon = tbd
+
+Damage Taken: //Ballon Health 
+Bird -1 
+Trees -1
+Mountain -2
+Archers -3 
+
+Damage Given: //Enemy Health 
+Bird -1
+Archer -1
+
+Streaks:
+5 birds in a row ->   +20% ballon repair 
+		      +20% ballon health
+
+10 birds in a row ->  +50% ballon repair 
+		      +50% ballon health 
+
+
 
 
 
