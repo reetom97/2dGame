@@ -9,6 +9,8 @@ Design: Side scrolling / horizontal movement -> Mario
 Balloon Mechanics:
 1. Pelt stone towards the tower(gets +1 stone) and birds(gets no stones @PETA)
 2. Max loadout is 10 stones
+	-> stones can be collectable item found in the air 
+	-> or stones umlimeted but with a cool down period after the 10 stones are thrown 
 3. Two healths
 4. Repair Option(180 secs cooldown)
 
