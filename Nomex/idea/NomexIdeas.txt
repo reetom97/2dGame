@@ -19,6 +19,12 @@ Background Mechanics:
 4. If the balloon touches the bird it will lose a health
 
 
+Stone mechanics:
+love.keypressed(key) -- will throw stone at whichever y and continue across positive x 
+love.keyboard.isDown(key) -- will allow for aiming the stone when realesed stone will throw at whatever tragectory the 
+			     the "aim wheel" is at -- see game_wheel.img
+
+
 Health:
 Bird =1 
 Archer =1
