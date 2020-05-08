@@ -1,6 +1,6 @@
 Ballon = Class {}
 
-local GRAVITY = 10
+local GRAVITY = 0.3
 
 function Ballon:init()
     self.image = love.graphics.newImage("asset/ballon.png")
@@ -16,10 +16,10 @@ end
 
 function Ballon:update(dt)
     --appply gravity to velocity
-    self.dy = self.dy + GRAVITY * dt
+    self.dy = self.dy + GRAVITY * dt  
     -- apply current velocity to Y position
-    if love.keyboard.wasPressed('space') then
-        self.dy = -5
+    if love.keyboard.isDown('space') then
+        self.dy = -0.55
     end
     self.y = self.y + self.dy 
 end
