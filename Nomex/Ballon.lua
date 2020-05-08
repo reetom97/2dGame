@@ -11,6 +11,15 @@ function Ballon:init()
     self.y = VIRTUAL_HEIGHT / 2 - (self.height / 2)
 end
 
+function Ballon:update(dt)
+    --appply gravity to velocity
+
+    self.dy = self.dy + GRAVITY * dt
+
+    -- apply current velocity to Y position
+    self.y = self.y + self.dy
+end
+
 function Ballon:render()
     love.graphics.draw(self.image, self.x, self.y)
 end
