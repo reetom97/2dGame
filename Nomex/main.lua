@@ -14,9 +14,9 @@ local background = love.graphics.newImage('asset/background.png')
 local bush = love.graphics.newImage('asset/ground.png')
 
 local backgroundScroll = 0
-local backgroundScroll_SPEED = 25
-
 local bushScroll = 0
+
+local backgroundScroll_SPEED = 25
 local bushScroll_SPEED = 50
 
 local backgroundScroll_LOOPING_POINT = 413
