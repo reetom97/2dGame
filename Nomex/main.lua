@@ -37,12 +37,20 @@ function love.resize(w, h)
     push:resize(w, h)
 end
 
+function love.keypressed(key)
+	if key == 'escape' then
+		love.event.quit()
+	end
+end
+
 function love.update(dt)
     backgroundScroll = (backgroundScroll + backgroundScroll_SPEED * dt) 
         % backgroundScroll_LOOPING_POINT
 
    bushScroll = (bushScroll + bushScroll_SPEED * dt) 
         % VIRTUAL_WIDTH
+
+   ballon:update(dt)
 end
 
 function love.draw()
