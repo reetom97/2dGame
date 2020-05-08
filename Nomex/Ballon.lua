@@ -13,6 +13,20 @@ function Ballon:init()
     self.dy = 0
 end
 
+function Ballon:collides(mountain)
+    -- the 2's are left and top offsets
+    -- the 4's are right and bottom offsets
+    -- both offsets are used to shrink the bounding box to give the player
+    -- a little bit of leeway with the collision
+    if (self.x + 2) + (self.width - 4) >= mountain.x and self.x + 2 <= mountain.x + MOUNTAIN_WIDTH then
+        if (self.y + 2) + (self.height - 4) >= mountain.y and self.y + 2 <= mountain.y + MOUNTAIN_HEIGHT then
+            return true
+        end
+    end
+
+    return false
+end
+
 function Ballon:update(dt)
     --appply gravity to velocity
     self.dy = self.dy + GRAVITY * dt
