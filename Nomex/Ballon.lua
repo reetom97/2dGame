@@ -24,10 +24,9 @@ function Ballon:update(dt)
     if love.keyboard.wasPressed('space') or love.mouse.wasPressed(1) then
         self.dy = -5
 
-    self.y = self.y + self.dy 
+    self.y = self.y + self.dy
 end
 
 function Ballon:render()
     love.graphics.draw(self.image, self.x, self.y)
 end
-
