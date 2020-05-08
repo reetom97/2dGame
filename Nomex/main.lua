@@ -32,7 +32,7 @@ function love.load()
         resizable = true
     })
 
-    love.keyboard.keypressed = {}
+    love.keyboard.keysPressed = {}
 end
 
 function love.resize(w, h)
@@ -40,17 +40,15 @@ function love.resize(w, h)
 end
 
 function love.keypressed(key)
+	love.keyboard.keysPressed[key] = true
+
 	if key == 'escape' then
 		love.event.quit()
 	end
 end
 
 function love.keyboard.wasPressed(key)
-    if love.keyboard.keysPressed[key] then
-        return true
-    else
-        return false
-    end
+    return love.keyboard.keysPressed[key]
 end
 
 function love.update(dt)
