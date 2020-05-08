@@ -9,11 +9,12 @@ function Ballon:init()
 
     self.x = VIRTUAL_WIDTH / 4 - (self.width / 2)
     self.y = VIRTUAL_HEIGHT / 2 - (self.height / 2)
+
+    self.dy = 0
 end
 
 function Ballon:update(dt)
     --appply gravity to velocity
-
     self.dy = self.dy + GRAVITY * dt
 
     -- apply current velocity to Y position
