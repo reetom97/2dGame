@@ -14,17 +14,17 @@ function Ballon:init()
 end
 
 --[[
-    AABB collision that expects a pipe, which will have an X and Y and reference
-    global pipe width and height values.
+    AABB collision that expects a mountain, which will have an X and Y and reference
+    global mountain width and height values.
 ]]
-function Bird:collides(pipe)
+function Ballon:collides(mountain)
     -- the 2's are left and top offsets
     -- the 4's are right and bottom offsets
     -- both offsets are used to shrink the bounding box to give the player
     -- a little bit of leeway with the collision
 
-    if (self.x + 2) + (self.width - 4) >= pipe.x and self.x + 2 <= pipe.x + PIPE_WIDTH then
-        if (self.y + 2) + (self.height - 4) >= pipe.y and self.y + 2 <= pipe.y + PIPE_HEIGHT then
+    if (self.x + 2) + (self.width - 4) >= mountain.x and self.x + 2 <= mountain.x + MOUNTAIN_WIDTH then
+        if (self.y + 2) + (self.height - 4) >= mountain.y and self.y + 2 <= mountain.y + MOUNTAIN_HEIGHT then
             return true
         end
     end
