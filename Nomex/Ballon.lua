@@ -2,8 +2,9 @@ Ballon = Class{}
 
 local GRAVITY = 10
 
+
 function Ballon:init()
-    self.image = love.graphics.circle( "fill", VIRTUAL_WIDTH / 2 - 8, VIRTUAL_HEIGHT / 2 - 8, 100 )
+    self.image = love.graphics.newImage('ballon.png')
     self.x = VIRTUAL_WIDTH / 2 - 8
     self.y = VIRTUAL_HEIGHT / 2 - 8
 
@@ -41,6 +42,11 @@ function Ballon:update(dt)
     end
 
     self.y = self.y + self.dy
+end
+
+function love.draw()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.circle("fill", 300, 300, 50, 100) -- Draw white circle with 100 segments.
 end
 
 function Ballon:render()

@@ -1,7 +1,7 @@
 push = require 'push'
 Class = require 'class'
 
---require 'Ballon'
+require 'Ballon'
 --require 'Mountain'
 
 WINDOW_WIDTH = 1280
