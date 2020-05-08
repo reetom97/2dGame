@@ -13,11 +13,14 @@ function Ballon:init()
     self.dy = 0
 end
 
+
 function Ballon:update(dt)
     --appply gravity to velocity
     self.dy = self.dy + GRAVITY * dt
-
     -- apply current velocity to Y position
+    if love.keyboard.wasPressed('space') or love.mouse.wasPressed(1) then
+        self.dy = -5
+
     self.y = self.y + self.dy
 end
 
