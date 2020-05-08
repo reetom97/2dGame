@@ -20,7 +20,7 @@ function Ballon:update(dt)
     -- apply current velocity to Y position
     if love.keyboard.wasPressed('space') or love.mouse.wasPressed(1) then
         self.dy = -5
-
+    end
     self.y = self.y + self.dy
 end
 
