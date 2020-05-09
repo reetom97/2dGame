@@ -6,6 +6,7 @@ require 'Mountain'
 require 'Bird'
 require 'Tower'
 require 'Cloud'
+require 'Bush'
 
 require 'StateMachine'
 --require 'states/PlayState'
