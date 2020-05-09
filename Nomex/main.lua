@@ -73,7 +73,8 @@ end
 
 function love.update(dt)
 	if scrolling then
-	    backgroundScroll = (backgroundScroll + backgroundScroll_SPEED * dt) 
+
+	   backgroundScroll = (backgroundScroll + backgroundScroll_SPEED * dt) 
 	        % backgroundScroll_LOOPING_POINT
 
 	   bushScroll = (bushScroll + bushScroll_SPEED * dt) 
