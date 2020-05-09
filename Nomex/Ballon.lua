@@ -27,6 +27,17 @@ function Ballon:collides(mountain)
     return false
 end
 
+function Ballon:collidesGround(bush)
+   
+    if ((self.x  + self.width)  == bush.x ) and (self.x <= bush.x + BUSH_WIDTH) then
+        if ((self.y + self.height) == bush.y ) and (self.y <= bush.y + BUSH_HEIGHT) then
+            return true
+        end
+    end
+
+    return false
+end
+
 function Ballon:update(dt)
     --appply gravity to velocity
     self.dy = self.dy + GRAVITY * dt
