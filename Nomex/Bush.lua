@@ -9,7 +9,7 @@ BUSH_WIDTH = 1100
 
 function Bush:init()
 	self.x = VIRTUAL_WIDTH
-	self.y = VIRTUAL_HEIGHT
+	self.y = VIRTUAL_HEIGHT 
 	self.width = BUSH_IMAGE:getWidth()
 end
 
@@ -18,5 +18,5 @@ function Bush:update(dt)
 end
 
 function Bush:render()
-	love.graphics.draw(self.image, self.x, self.y)
+	love.graphics.draw(BUSH_IMAGE, self.x, self.y)
 end
