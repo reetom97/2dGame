@@ -2,14 +2,14 @@ Mountain = Class{}
 
 local MOUNTAIN_IMAGE = love.graphics.newImage('asset/pipe.png')
 
-local MOUNTAIN_SCROLLING = -60
+local MOUNTAIN_SCROLLING = -40
 
 MOUNTAIN_HEIGHT = 288
 MOUNTAIN_WIDTH = 70
 
 function Mountain:init()
 	self.x = VIRTUAL_WIDTH
-	self.y = math.random(VIRTUAL_HEIGHT / 4, VIRTUAL_HEIGHT - 40)
+	self.y = math.random(VIRTUAL_HEIGHT / 3, VIRTUAL_HEIGHT - 80)
 	self.width = MOUNTAIN_IMAGE:getWidth()
 end
 
