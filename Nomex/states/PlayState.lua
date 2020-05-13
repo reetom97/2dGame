@@ -52,5 +52,5 @@ function PlayState:render()
     	mountain:render()
     end
 
-    ballon:render()
+    self.ballon:render()
 end
