@@ -33,8 +33,10 @@ local backgroundScroll_LOOPING_POINT = 413
 local ballon = Ballon()
 
 local mountains = {}
+local birds = {}
 
 local spawn_Mountain_Timer = 0
+local spawn_Bird_Timer = math.random(2, 7)
 
 local scrolling = true
 
@@ -101,10 +103,16 @@ function love.update(dt)
 	        % VIRTUAL_WIDTH
 
 	   spawn_Mountain_Timer = spawn_Mountain_Timer + dt
+	   spawn_Bird_Timer = spawn_Bird_Timer + dt
 
 	   if spawn_Mountain_Timer > 2 then
 	   		table.insert(mountains, Mountain())
 	   		spawn_Mountain_Timer = 0
+	   end
+
+	   if spawn_Bird_Timer > math.random(2, 7) then
+	   		table.insert(birds, Bird())
+	   		spawn_Bird_Timer = 0
 	   end
 
 	   ballon:update(dt)
@@ -125,11 +133,27 @@ function love.update(dt)
 	   		end
 	   end
 
+	   for i, bird in pairs(birds) do
+	   		bird:update(dt)
+
+	   		if bird.x < -bird.width then
+	   			table.remove(birds, i)
+	   		end
+	   	end
+		
+		for i, bird in pairs(birds) do
+		   	if bird.remove then
+		   		table.remove(bird, i)
+		   	end
+		end
+
 	   for i, mountain in pairs(mountains) do
 	   		if mountain.remove then
 	   			table.remove(mountain, i)
 	   		end
 	   end
+
+	   
 
 	   love.keyboard.keysPressed = {}
 
@@ -140,6 +164,10 @@ function love.draw()
     push:start()
 
     love.graphics.draw(background, -backgroundScroll, 0)
+
+    for i, bird in pairs(birds) do
+    	bird:render()
+    end
 
     for i, mountain in pairs(mountains) do
     	mountain:render()
