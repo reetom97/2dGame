@@ -7,13 +7,11 @@ require 'Bird'
 require 'Tower'
 require 'Cloud'
 require 'Bush'
+
 require 'StateMachine'
-require 'states/BaseState'
-require 'states/PlayState'
-require 'states/TitleScreenState'
-
---require 'states/CountdownState'
-
+--require 'states/PlayState'
+--require 'states/TitleScreenState'
+--require 'states/BaseState'
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -32,11 +30,11 @@ local bushScroll_SPEED = 50
 
 local backgroundScroll_LOOPING_POINT = 413
 
---local ballon = Ballon()
+local ballon = Ballon()
 
---local mountains = {}
+local mountains = {}
 
---local spawn_Mountain_Timer = 0
+local spawn_Mountain_Timer = 0
 
 local scrolling = true
 
@@ -46,26 +44,14 @@ function love.load()
     math.randomseed(os.time())
 
     love.window.setTitle('Nomex')
-	
-	smallFont = love.graphics.newFont('font/font.ttf', 8)
-    mediumFont = love.graphics.newFont('font/flappy.ttf', 14)
-    flappyFont = love.graphics.newFont('font/flappy.ttf', 28)
-    hugeFont = love.graphics.newFont('font/flappy.ttf', 56)
-	love.graphics.setFont(flappyFont)
-	
-	push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
+
+
+    push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
         vsync = true,
         fullscreen = false,
         resizable = true
-	})
+    })
 
-	gStateMachine = StateMachine {
-		['title'] = function() return TitleScreenState() end,
-		--['countdown'] = function() return CountdownState() end,
-		['play'] = function() return PlayState() end
-	}
-	
-	gStateMachine:change('title')
 
     love.keyboard.keysPressed = {}
 end
@@ -80,36 +66,65 @@ function love.keypressed(key)
 	if key == 'escape' then
 		love.event.quit()
 	end
-
 end
 
 function love.keyboard.wasPressed(key)
-	if love.keyboard.keysPressed[key] then
-        return true
-    else
-        return false
-    end
+    return love.keyboard.keysPressed[key]
 end
 
 function love.update(dt)
+	if scrolling then
+
 	   backgroundScroll = (backgroundScroll + backgroundScroll_SPEED * dt) 
 	        % backgroundScroll_LOOPING_POINT
 
 	   bushScroll = (bushScroll + bushScroll_SPEED * dt) 
 	        % VIRTUAL_WIDTH
 
-	   gStateMachine:update(dt)
+	   spawn_Mountain_Timer = spawn_Mountain_Timer + dt
+
+	   if spawn_Mountain_Timer > 2 then
+	   		table.insert(mountains, Mountain())
+	   		spawn_Mountain_Timer = 0
+	   end
+
+	   ballon:update(dt)
+
+	   for i, mountain in pairs(mountains) do
+	   		mountain:update(dt)
+
+	   		if ballon:collides(mountain) then
+	   			scrolling = false
+	   		end	
+
+	   		if mountain.x < -mountain.width then
+	   			table.remove(mountains, i)
+	   		end
+	   end
+
+	   for i, mountain in pairs(mountains) do
+	   		if mountain.remove then
+	   			table.remove(mountain, i)
+	   		end
+	   end
 
 	   love.keyboard.keysPressed = {}
- 
+
+   end
 end
 
 function love.draw()
     push:start()
 
     love.graphics.draw(background, -backgroundScroll, 0)
-	gStateMachine:render()
-	love.graphics.draw(bush, -bushScroll, VIRTUAL_HEIGHT - 16)
 
+    for i, mountain in pairs(mountains) do
+    	mountain:render()
+    end
+   
+    love.graphics.draw(bush, -bushScroll, VIRTUAL_HEIGHT - 16)
+
+    ballon:render()
+    
     push:finish()
 end

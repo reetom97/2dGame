@@ -13,7 +13,6 @@ function Ballon:init()
     self.dy = 0
 end
 
-
 function Ballon:collides(mountain)
     -- the 2's are left and top offsets
     -- the 4's are right and bottom offsets
