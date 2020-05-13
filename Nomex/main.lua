@@ -93,7 +93,7 @@ function love.update(dt)
 	   for i, mountain in pairs(mountains) do
 	   		mountain:update(dt)
 
-	   		if ballon:collides(mountain) then
+	   		if ballon:collides(mountain)  or  ((ballon.y + 2) + (ballon.height - 4)  >= VIRTUAL_HEIGHT - 15) then
 	   			scrolling = false
 	   		end	
 
