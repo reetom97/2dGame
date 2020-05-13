@@ -5,8 +5,8 @@ require 'Ballon'
 require 'Mountain'
 require 'Bird'
 require 'Tower'
-require 'Cloud'
 require 'Bush'
+--require 'Aim'
 
 require 'StateMachine'
 --require 'states/PlayState'
@@ -54,6 +54,9 @@ function love.load()
 
 
     love.keyboard.keysPressed = {}
+    love.mouse.keysPressed = {}
+    love.mouse.keysReleased = {}
+
 end
 
 function love.resize(w, h)
@@ -70,6 +73,22 @@ end
 
 function love.keyboard.wasPressed(key)
     return love.keyboard.keysPressed[key]
+end
+
+function love.mousepressed(x, y, key)
+    love.mouse.keysPressed[key] = true
+end
+
+function love.mousereleased(x, y, key)
+    love.mouse.keysReleased[key] = true 
+end
+
+function love.mouse.wasPressed(key)
+    return love.mouse.keysPressed[key]
+end
+
+function love.mouse.wasReleased(key)
+    return love.mouse.keysReleased[key]
 end
 
 function love.update(dt)
@@ -93,7 +112,11 @@ function love.update(dt)
 	   for i, mountain in pairs(mountains) do
 	   		mountain:update(dt)
 
-	   		if ballon:collides(mountain)  or  ((ballon.y + 2) + (ballon.height - 4)  >= VIRTUAL_HEIGHT - 15) then
+	   		if ballon:collides(mountain)  or  
+	   			--ground collision checker
+	   			((ballon.y + 2) + (ballon.height - 4)  >= VIRTUAL_HEIGHT - 15) 
+	   			--cloud collision checker
+	   			or ((ballon.y + 2) + (ballon.height - 4)  <= 25)then
 	   			scrolling = false
 	   		end	
 
