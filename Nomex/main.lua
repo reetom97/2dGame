@@ -9,9 +9,10 @@ require 'Cloud'
 require 'Bush'
 
 require 'StateMachine'
+require 'states/BaseState'
 require 'states/PlayState'
 require 'states/TitleScreenState'
---require 'states/BaseState'
+
 
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
@@ -54,7 +55,7 @@ function love.load()
 	
 	gStateMachine = StateMachine {
         ['title'] = function() return TitleScreenState() end,
-        ['play'] = function() return PlayState() end,
+        ['play'] = function() return PlayState() end
     }
     gStateMachine:change('title')
 
@@ -83,16 +84,17 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
-	if scrolling then
-
 	   backgroundScroll = (backgroundScroll + backgroundScroll_SPEED * dt) 
 	        % backgroundScroll_LOOPING_POINT
 
 	   bushScroll = (bushScroll + bushScroll_SPEED * dt) 
 	        % VIRTUAL_WIDTH
 
-end
+	gStateMachine:update(dt)
+
+	love.keyboard.keysPressed = {}
 end 
+
 function love.draw()
     push:start()
 
