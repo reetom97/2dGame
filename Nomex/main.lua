@@ -39,10 +39,10 @@ function love.load()
 
 	love.window.setTitle('Nomex')
 	
-	smallFont = love.graphics.newFont('font.ttf', 8)
-    mediumFont = love.graphics.newFont('flappy.ttf', 14)
-    flappyFont = love.graphics.newFont('flappy.ttf', 28)
-    hugeFont = love.graphics.newFont('flappy.ttf', 56)
+	smallFont = love.graphics.newFont('font/font.ttf', 8)
+    mediumFont = love.graphics.newFont('font/flappy.ttf', 14)
+    flappyFont = love.graphics.newFont('font/flappy.ttf', 28)
+    hugeFont = love.graphics.newFont('font/flappy.ttf', 56)
     love.graphics.setFont(flappyFont)
 
 
@@ -75,7 +75,11 @@ function love.keypressed(key)
 end
 
 function love.keyboard.wasPressed(key)
-    return love.keyboard.keysPressed[key]
+    if love.keyboard.keysPressed[key] then
+        return true
+    else
+        return false
+	end
 end
 
 function love.update(dt)
@@ -88,7 +92,7 @@ function love.update(dt)
 	        % VIRTUAL_WIDTH
 
 end
-
+end 
 function love.draw()
     push:start()
 

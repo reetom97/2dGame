@@ -47,10 +47,10 @@ end
 
 end
 
+
 function PlayState:render()
     for i, mountain in pairs(self.mountains) do
     	mountain:render()
     end
 
     self.ballon:render()
-end
