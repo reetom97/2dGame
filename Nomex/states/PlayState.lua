@@ -54,3 +54,4 @@ function PlayState:render()
     end
 
     self.ballon:render()
+end
