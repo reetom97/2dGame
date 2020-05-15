@@ -61,6 +61,8 @@ function love.load()
 
 
     love.keyboard.keysPressed = {}
+    love.mouse.keysPressed = {}
+    love.mouse.keysReleased = {}
 end
 
 function love.resize(w, h)
@@ -80,8 +82,26 @@ function love.keyboard.wasPressed(key)
         return true
     else
         return false
-	end
+    end
+    
 end
+
+function love.mousepressed(x, y, key)
+    love.mouse.keysPressed[key] = true
+end
+
+function love.mousereleased(x, y, key)
+    love.mouse.keysReleased[key] = true 
+end
+
+function love.mouse.wasPressed(key)
+    return love.mouse.keysPressed[key]
+end
+
+function love.mouse.wasReleased(key)
+    return love.mouse.keysReleased[key]
+end
+
 
 function love.update(dt)
 	   backgroundScroll = (backgroundScroll + backgroundScroll_SPEED * dt) 

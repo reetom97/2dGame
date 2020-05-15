@@ -42,7 +42,7 @@ function Ballon:update(dt)
     --appply gravity to velocity
     self.dy = self.dy + GRAVITY * dt
     -- apply current velocity to Y position
-    if love.keyboard.isDown('space') then
+    if love.keyboard.isDown('space') or love.mouse.isDown(1)then
         self.dy = -0.55
     end
     self.y = self.y + self.dy
