@@ -23,6 +23,10 @@ VIRTUAL_HEIGHT = 288
 local background = love.graphics.newImage('asset/background.png')
 local bush = love.graphics.newImage('asset/ground.png')
 
+local bulletSpeed
+
+local ballon = Ballon()
+
 local backgroundScroll = 0
 local bushScroll = 0
 
@@ -58,6 +62,13 @@ function love.load()
         ['play'] = function() return PlayState() end
     }
     gStateMachine:change('title')
+
+    love.graphics.setBackgroundColor(0.21, 0.67, 0.97)
+ 
+	bulletSpeed = 250
+ 
+	bullets = {}
+	ballon = {x= VIRTUAL_WIDTH / 4 - (ballon.width / 2), y= VIRTUAL_HEIGHT / 2 - (ballon.height / 2), width= ballon.image:getWidth(), height= ballon.image:getHeight()}
 
 
     love.keyboard.keysPressed = {}
@@ -102,13 +113,34 @@ function love.mouse.wasReleased(key)
     return love.mouse.keysReleased[key]
 end
 
+function love.mousepressed(x, y, button)
+	if button == 2 then
+		local startX = ballon.x + ballon.width 
+		local startY = ballon.y + ballon.height 
+		local mouseX = x
+		local mouseY = y
+ 
+		local angle = math.atan2((mouseY - startY), (mouseX - startX))
+ 
+		local bulletDx = bulletSpeed * math.cos(angle)
+		local bulletDy = bulletSpeed * math.sin(angle)
+ 
+		table.insert(bullets, {x = startX, y = startY, dx = bulletDx, dy = bulletDy})
+	end
+end
+
 
 function love.update(dt)
 	   backgroundScroll = (backgroundScroll + backgroundScroll_SPEED * dt) 
 	        % backgroundScroll_LOOPING_POINT
 
 	   bushScroll = (bushScroll + bushScroll_SPEED * dt) 
-	        % VIRTUAL_WIDTH
+            % VIRTUAL_WIDTH
+            
+            for i,v in ipairs(bullets) do
+                v.x = v.x + (v.dx * dt)
+                v.y = v.y + (v.dy * dt)
+            end
 
 	gStateMachine:update(dt)
 
@@ -119,6 +151,15 @@ function love.draw()
     push:start()
 
     love.graphics.draw(background, -backgroundScroll, 0)
+
+    --love.graphics.setColor(1, 1, 1)
+	--love.graphics.rectangle("fill",  ballon.x, ballon.y, ballon.width, ballon.height)
+ 
+	love.graphics.setColor(0.5, 0.5, 0.5)
+	for i,v in ipairs(bullets) do
+        love.graphics.circle("fill", v.x, v.y, 3)
+    end 
+
 	gStateMachine:render()
     love.graphics.draw(bush, -bushScroll, VIRTUAL_HEIGHT - 16)
     
